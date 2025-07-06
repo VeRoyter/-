@@ -12,5 +12,10 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxt/ui'
-  ]
+  ],
+  fonts: {
+    families: [
+      { name: 'Montserrat', provider: 'google', weights: ['400', '500', '600'] }
+    ]
+  }
 })

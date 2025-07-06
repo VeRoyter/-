@@ -1,29 +1,31 @@
 <template>
   <div class="event-card">
-    <div class="card-header">
-      <h3 class="event-title">{{ eventData.title }}</h3>
-      <div class="tags-container">
-        <div 
-          v-for="(tag, index) in eventData.tags" 
-          :key="index" 
-          :class="['tag', `tag--${tag.type}`]"
-        >
-          <span>{{ tag.text }}</span>
-        </div>
-      </div>
+    <div class="card-image">
+      <NuxtImg 
+        :src="eventData.cardImage || '/public/images/1_powerlift.jpg'" 
+        width="200"
+        height="200"
+        :alt="eventData.title"
+        fit="cover"
+      />
+
     </div>
     
-    <div class="card-body">
-      <div class="card-content">
-        <div class="card-image">
-          <NuxtImg 
-            :src="eventData.image || '/images/sport-icon.svg'" 
-            width="130"
-            height="130"
-            :alt="eventData.title"
-            fit="cover"
-          />
+    <div class="card-main-content">
+      <div class="card-header">
+        <h3 class="event-title">{{ eventData.title }}</h3>
+        <div class="tags-container">
+          <div 
+            v-for="(tag, index) in eventData.tags" 
+            :key="index" 
+            :class="['tag', `tag--${tag.type}`]"
+          >
+            <span>{{ tag.text }}</span>
+          </div>
         </div>
+      </div>
+
+      <div class="card-bottom-row">
         <div class="event-info">
           <div class="hashtag">{{ eventData.hashtag }}</div>
           
@@ -60,13 +62,12 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="card-action">
-        <!-- Мы используем NuxtLink, который стилизован как кнопка -->
-        <NuxtLink :to="`/events/${eventData.id}`" class="details-btn">
-          Подробнее
-        </NuxtLink>
+        
+        <div class="card-action">
+          <NuxtLink :to="`/events/${eventData.id}`" class="details-btn">
+            Подробнее
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
@@ -85,21 +86,37 @@ defineProps({
 .event-card {
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
   padding: 20px;
-  gap: 15px;
+  gap: 10px;
   width: 100%;
   background: #FFFFFF;
   border-top: 2px solid #70232F;
   border-radius: 5px;
 }
 
+.card-image {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  background: #F0F0F0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 15px;
-  width: 100%;
+  gap: 10px;
 }
 
 .event-title {
@@ -113,62 +130,33 @@ defineProps({
 
 .tags-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
-  flex-shrink: 0;
+  gap: 20px;
 }
-
 .tag {
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 5px 15px;
+  gap: 10px;
+  background: #D86B79;
   border-radius: 5px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  white-space: nowrap;
-}
-
-.tag--free {
-  background: #D86B79;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 .tag--trial {
   background: #FFFFFF;
   color: #2F050F;
   border: 1px solid #D86B79;
 }
-.tag--paid {
-  background: #D86B79;
-  color: #FFFFFF;
-}
 
-.card-body {
+.card-bottom-row {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.card-content {
-  flex: 1;
-  display: flex;
-  gap: 20px;
-  min-width: 0;
-}
-
-.card-image {
-  width: 200px;
-  height: 200px;
-  flex-shrink: 0;
-  background: #F0F0F0;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: auto;
 }
 
 .event-info {
@@ -180,6 +168,7 @@ defineProps({
 
 .hashtag {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #D86B79;
@@ -189,25 +178,23 @@ defineProps({
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #333333;
 }
 .icon {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
 }
-.info-row span {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  color: #333333;
-}
 
 .schedule {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-top: auto;
+  gap: 10px;
 }
 .schedule-header {
   display: flex;
@@ -219,6 +206,7 @@ defineProps({
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+  color: #333333;
 }
 .time-slots {
   display: flex;
@@ -230,61 +218,49 @@ defineProps({
   background: #F7DAAB;
   border-radius: 5px;
   font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
   font-size: 14px;
+  line-height: 20px;
+  color: #333333;
 }
 
-.card-action {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 100%;
-  min-height: 200px;
-}
 
 .details-btn {
-  display: inline-block;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 20px;
+  gap: 10px;
   background: #70232F;
   border-radius: 5px;
-  border: none;
+  text-decoration: none;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 14px;
+  line-height: 17px;
   color: #FFFFFF;
   cursor: pointer;
-  white-space: nowrap;
-
-  text-decoration: none;
-}
-.details-btn:hover, .details-btn:focus {
-  background: #5a1c25;
 }
 
+/* Адаптивность */
 @media (max-width: 768px) {
-  .card-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .tags-container {
-    justify-content: flex-start;
-  }
-  .card-body {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .card-content {
+  .event-card {
     flex-direction: column;
   }
   .card-image {
     width: 100%;
-    height: 150px;
+    height: 180px;
+  }
+  .card-main-content {
+    width: 100%;
+  }
+  .card-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
   .card-action {
     align-self: flex-end;
     margin-top: 15px;
-    height: auto;
-    min-height: unset;
   }
 }
 </style>

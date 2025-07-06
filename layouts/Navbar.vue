@@ -35,8 +35,8 @@
 .navbar {
   display: flex;
   justify-content: center;
-  padding: 0 20px;
-  margin: 20px 0;
+  /* padding: 0 20px; */
+  /* margin: 20px 0; */
 }
 
 .navbar-container {
@@ -200,11 +200,30 @@
   }
 }
 
+@media (max-width: 992px) {
+  .navbar-container {
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+  }
+  .search-section {
+    flex-grow: 1;
+  }
+}
+
 @media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  
   .search-section {
     flex-direction: column;
-    width: auto;
+    width: 100%;
+    height: auto;
     gap: 10px;
+    order: 2;
   }
   
   .search-box {
@@ -214,7 +233,7 @@
   .filter-buttons {
     width: 100%;
     justify-content: space-between;
-    gap: 5px;
+    gap: 10px;
   }
   
   .filter-btn {
@@ -224,8 +243,9 @@
   }
   
   .map-btn {
-    width: auto;
-    min-width: 141px;
+    width: 100%;
+    justify-content: center;
+    order: 1;
   }
 }
 

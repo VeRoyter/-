@@ -7,24 +7,21 @@
       
       <div class="main-content">
         <div class="events-column">
-          <div class="events-list">
-            Силовой спорт
-            <EventCard 
-              v-for="event in events" 
-              :key="event.id" 
-              :event-data="event" 
-            />
-            Силовой спорт
-            <EventCard 
-              v-for="event in events" 
-              :key="event.id" 
-              :event-data="event" 
-            />
+          <div v-for="categoryGroup in categorizedEvents" :key="categoryGroup.name" class="events-group">
+            <h3 class="category-title">{{ categoryGroup.name }}</h3>
+
+            <div class="events-list">
+              <EventCard 
+                v-for="event in categoryGroup.events" 
+                :key="event.id" 
+                :event-data="event" 
+              />
+            </div>
           </div>
         </div>
         
         <aside class="filters-column">
-          Фильтры
+          <h3 class="filters-title">Фильтры</h3>
           <FiltersPanel />
         </aside>
       </div>
@@ -33,13 +30,34 @@
 </template>
 
 <script setup>
-import Header from '@/layouts/Header.vue'
-import Navbar from '@/layouts/Navbar.vue'
-import EventCard from '@/components/common/EventCard.vue'
-import FiltersPanel from '@/components/common/FiltersPanel.vue'
+import { computed } from 'vue';
+import Header from '@/layouts/Header.vue';
+import Navbar from '@/layouts/Navbar.vue';
+import EventCard from '@/components/common/EventCard.vue';
+import FiltersPanel from '@/components/common/FiltersPanel.vue';
 
-// Получаем список всех событий с нашего API
-const { data: events, pending, error } = await useFetch('/api/events');
+const { data: allEvents, pending } = await useFetch('/api/events');
+
+const categorizedEvents = computed(() => {
+  if (!allEvents.value) return [];
+
+  const groups = allEvents.value.reduce((acc, event) => {
+    const category = event.category;
+    
+    if (!acc[category]) {
+      acc[category] = {
+        name: category,
+        events: []
+      };
+    }
+    
+    acc[category].events.push(event);
+    
+    return acc;
+  }, {});
+  
+  return Object.values(groups);
+});
 </script>
 
 <style scoped>
@@ -47,16 +65,15 @@ const { data: events, pending, error } = await useFetch('/api/events');
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  
+  max-width: 1480px;
+  margin: auto;
 }
 
 .content-container {
   background: #EFEFEF;
   border-radius: 15px;
   padding: 40px;
-  gap: 20px;
   max-width: 1480px;
-  width: calc(100% - 40px);
   margin: 20px auto 40px; 
 }
 
@@ -67,9 +84,14 @@ const { data: events, pending, error } = await useFetch('/api/events');
 }
 
 .events-column {
-  border-radius: 10px;
-  padding: 20px;
   flex: 1;
+}
+
+.events-group {
+  margin-bottom: 40px; /* Отступ между категориями */
+}
+.events-group:last-child {
+  margin-bottom: 0;
 }
 
 .events-list {
@@ -78,18 +100,35 @@ const { data: events, pending, error } = await useFetch('/api/events');
   gap: 25px;
 }
 
+.category-title, .filters-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
+  color: #333333;
+  margin: 0 0 20px 0;
+}
+
+.filters-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
+  color: #333333;
+  margin: 0 0 0 0;
+}
+
 .filters-column {
-  width: 300px;
+  width: 330px;
+  flex-shrink: 0;
   top: 20px;
   align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 @media (max-width: 1200px) {
-  .content-container {
-    margin-top: 120px;
-    padding: 30px;
-  }
-  
   .main-content {
     flex-direction: column;
   }
@@ -99,25 +138,6 @@ const { data: events, pending, error } = await useFetch('/api/events');
     width: 100%;
     order: -1;
     margin-bottom: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .content-container {
-    padding: 20px;
-    margin-top: 100px;
-    width: calc(100% - 20px);
-  }
-}
-
-@media (max-width: 576px) {
-  .content-container {
-    padding: 15px;
-    margin-top: 90px;
-  }
-  
-  .events-column {
-    padding: 15px;
   }
 }
 </style>
