@@ -16,6 +16,9 @@ jobs:
           node-version: "20"
       # Выберите свой собственный менеджер пакетов и сценарий сборки
       - run: npm install
+      - name: Build static site
+        run: npx nuxt generate
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
