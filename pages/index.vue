@@ -31,8 +31,8 @@
 
 <script setup>
 import { computed } from 'vue';
-import Header from '@/layouts/Header.vue';
-import Navbar from '@/layouts/Navbar.vue';
+import Header from '@/components/common/Header.vue';
+import Navbar from '@/components/common/Navbar.vue';
 import EventCard from '@/components/common/EventCard.vue';
 import FiltersPanel from '@/components/common/FiltersPanel.vue';
 

@@ -18,13 +18,6 @@
 </template>
 
 <script setup>
-import Header from '@/layouts/Header.vue';
-import EventNav from '@/components/event/EventNav.vue';
-import EventDetailHeader from '@/components/event/EventDetailHeader.vue';
-// import EventGroups from '@/components/event/EventGroups.vue';
-// import EventSchedule from '@/components/event/EventSchedule.vue';
-// import EventDescription from '@/components/event/EventDescription.vue';
-// import ProgramAccordion from '@/components/event/ProgramAccordion.vue';
 
 const route = useRoute();
 const eventId = route.params.id;
