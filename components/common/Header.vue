@@ -3,7 +3,7 @@
     <div class="logo-container">
       <div class="logo">
         <NuxtImg 
-          src="/images/logo.svg" 
+          :src="`/images/${logo}`"
           width="76"
           height="76"
           alt="KidsConnect Logo"
@@ -14,6 +14,15 @@
     </div>
   </header>
 </template>
+
+<script setup>
+defineProps({
+  logo: {
+    type: String,
+    default: 'logo.svg'
+  }
+})
+</script>
 
 <style scoped>
 .header {

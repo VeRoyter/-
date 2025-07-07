@@ -305,11 +305,15 @@ const allEvents = [
           - Аттестация (количество часов – 6);`
       }
     ]
-  }
+  },
 ];
 
+import { getQuery } from 'h3';
+
 export default defineEventHandler((event) => {
-  const { id } = getRouterParams(event);
+  const query = getQuery(event);
+  const id = query.id;
+
   if (id) {
     const singleEvent = allEvents.find(e => e.id === parseInt(id));
     return singleEvent || { error: 'Event not found' };

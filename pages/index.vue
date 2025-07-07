@@ -1,9 +1,9 @@
 <template>
-  <div class="page-container">
+  <!-- <div class="page-container">
     <Header />
     
     <div class="content-container">
-      <Navbar />
+      <Navbar /> -->
       
       <div class="main-content">
         <div class="events-column">
@@ -11,7 +11,7 @@
             <h3 class="category-title">{{ categoryGroup.name }}</h3>
 
             <div class="events-list">
-              <EventCard 
+              <CommonEventCard 
                 v-for="event in categoryGroup.events" 
                 :key="event.id" 
                 :event-data="event" 
@@ -22,20 +22,15 @@
         
         <aside class="filters-column">
           <h3 class="filters-title">Фильтры</h3>
-          <FiltersPanel />
+          <CommonFiltersPanel  />
         </aside>
       </div>
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
 </template>
 
 <script setup>
 import { computed } from 'vue';
-import Header from '@/components/common/Header.vue';
-import Navbar from '@/components/common/Navbar.vue';
-import EventCard from '@/components/common/EventCard.vue';
-import FiltersPanel from '@/components/common/FiltersPanel.vue';
-
 const { data: allEvents, pending } = await useFetch('/api/events');
 
 const categorizedEvents = computed(() => {

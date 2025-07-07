@@ -2,13 +2,12 @@
   <div class="event-card">
     <div class="card-image">
       <NuxtImg 
-        :src="eventData.cardImage || '/public/images/1_powerlift.jpg'" 
+        :src="eventData.cardImage || '/images/default-placeholder.svg'"
         width="200"
         height="200"
         :alt="eventData.title"
         fit="cover"
       />
-
     </div>
     
     <div class="card-main-content">
