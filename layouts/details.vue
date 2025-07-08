@@ -20,15 +20,14 @@
   margin: auto;
 }
 
-  .content-container {
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background: #EFEFEF;
   border-radius: 15px;
   padding: 40px;
-  max-width: 1480px;
-  margin: 20px auto 40px;
-  
-  /* --- Добавленные строки --- */
-  width: 100%;             /* Занимать всю доступную ширину */
-  box-sizing: border-box;   /* Включить padding в расчет ширины */
+  margin-top: 20px;
 }
+
 </style>

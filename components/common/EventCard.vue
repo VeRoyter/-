@@ -241,6 +241,10 @@ defineProps({
   cursor: pointer;
 }
 
+.details-btn:hover {
+  background: #4f1e1e;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   .event-card {

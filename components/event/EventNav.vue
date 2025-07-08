@@ -1,6 +1,6 @@
 <template>
   <nav class="event-nav">
-    <NuxtLink to="/" class="nav-btn back-link">
+    <NuxtLink to="/" class="nav-btn">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z" fill="#333333"/>
       </svg>
@@ -26,29 +26,36 @@ defineProps({
 </script>
 
 <style scoped>
+/* Главный контейнер навигации */
 .event-nav {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0px;
+  gap: 20px;
   width: 100%;
-  margin-bottom: 20px;
+  height: 40px;
 }
 
+/* Заголовок страницы */
 .page-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
   color: #2F050F;
-  margin: 0;
   text-align: center;
+  /* Позволяет заголовку занимать центральное пространство */
+  flex-grow: 1; 
 }
 
+/* Общий стиль для кнопок */
 .nav-btn {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0px 20px;
   gap: 10px;
   height: 40px;
   background: #FFFFFF;
@@ -62,5 +69,10 @@ defineProps({
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
+  flex-shrink: 0; /* Предотвращает сжатие кнопок */
+}
+
+.nav-btn:hover {
+  background: #f5f5f5;
 }
 </style>

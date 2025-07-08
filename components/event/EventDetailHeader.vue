@@ -61,7 +61,6 @@ defineProps({
 </script>
 
 <style scoped>
-/* Основной контейнер карты */
 .event-card {
   box-sizing: border-box;
   display: flex;
@@ -76,7 +75,6 @@ defineProps({
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Контейнер изображения */
 .image-container {
   width: 200px;
   height: 200px;
@@ -95,27 +93,24 @@ defineProps({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: stretch; /* ИСПРАВЛЕНО: Растягиваем дочерние элементы */
+  align-items: stretch;
   height: 200px;
 }
 
-/* Верхняя часть с тегами и деталями */
 .top-content {
-  width: 100%; /* Растягиваем, чтобы занять всю доступную ширину */
+  width: 100%;
   align-self: stretch; 
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Блок с тегами "Набор открыт" и "Бесплатно" */
 .tags-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Блок с деталями (возраст, адрес) */
 .details-section {
   display: flex;
   flex-direction: column;
@@ -123,7 +118,6 @@ defineProps({
   gap: 10px;
 }
 
-/* Строка с иконкой и текстом */
 .info-row {
   display: flex;
   align-items: center;
@@ -137,7 +131,6 @@ defineProps({
   flex-shrink: 0;
 }
 
-/* Тег "Набор открыт" */
 .status-tag {
   box-sizing: border-box;
   padding: 5px 15px;
@@ -149,7 +142,6 @@ defineProps({
   color: #2F050F;
 }
 
-/* Тег цены */
 .price-tag {
   padding: 5px 15px;
   border-radius: 5px;
@@ -160,13 +152,11 @@ defineProps({
   background: #D86B79;
 }
 
-/* Нижняя часть с кнопкой */
 .action-footer {
   display: flex;
   justify-content: flex-end;
 }
 
-/* Кнопка "Записаться" */
 .apply-btn {
   padding: 10px 20px;
   background: #70232F;
@@ -177,5 +167,9 @@ defineProps({
   line-height: 20px;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+.apply-btn:hover {
+  background: #4f1e1e;
 }
 </style>
